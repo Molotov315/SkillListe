@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Skill Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="main.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="controls-container">
+            <div class="skill-select-container">
+                <h2>Bitte wählen:</h2>
+                <div class="skill-display">
+                    <select id="skillSelect" onchange="handleSkillSelect()">
+                        <option value="" disabled selected>Bitte auswählen</option>
+                        <option value="new">Neuen Skill anlegen</option>
+                    </select>
+                    <div class="skill-edit-container" style="display: none;">
+                        <input type="text" id="editSkillInput" placeholder="Skill Name eingeben">
+                        <div class="edit-name-btn">
+                            <button onclick="saveNewSkill()" class="save-name-btn">Speichern</button>
+                            <button onclick="resetNewSkillInput()" class="cancel-btn">Abbrechen</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="control-buttons" style="display: none;">
+                    <button class="edit-btn" onclick="editSkillName()">✏️</button>
+                    <button class="delete-btn" onclick="deleteSkill(document.getElementById('skillSelect').value)">❌</button>
+                </div>
+            </div>
+            <div class="level-select-container">
+                <div class="level-select" style="display: none;">
+                    <h2>Level wählen:</h2>
+                    <label for="level1">1 <input type="radio" name="level" value="1" id="level1"></label>
+                    <label for="level2">2 <input type="radio" name="level" value="2" id="level2"></label>
+                    <label for="level3">3 <input type="radio" name="level" value="3" id="level3"></label>
+                    <label for="level4">4 <input type="radio" name="level" value="4" id="level4"></label>
+                    <label for="level5">5 <input type="radio" name="level" value="5" id="level5"></label>
+                </div>
+            </div>
+        </div>
+
+        <div class="requirements">
+            <div class="todo">
+                <h2>
+                    Noch zu erledigen 
+                    <button id="addRequirementBtn" style="display: none;" onclick="showNewRequirement()" class="add-btn">+</button>
+                </h2>
+                <div id="todoList"></div>
+            </div>
+            <div class="done">
+                <h2>Erledigt</h2>
+                <div id="doneList"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL -->
+    <div id="newRequirementModal" class="modal">
+        <div class="modal-content">
+            <h3>Neue Anforderung</h3>
+            <input type="text" id="newRequirementInput" placeholder="Anforderung eingeben">
+            <div class="modal-buttons">
+                <button class="save-name-btn" id="saveRequirementBtn">Speichern</button>
+                <button class="cancel-btn" id="cancelRequirementBtn">Abbrechen</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="editRequirementModal" class="modal">
+        <div class="modal-content">
+            <h3>Anforderung bearbeiten</h3>
+            <input type="text" id="editRequirementInput" placeholder="Anforderung bearbeiten">
+            <div class="modal-buttons">
+                <button class="save-name-btn" id="editRequirementSaveBtn">Speichern</button>
+                <button class="cancel-btn" id="editRequirementCancelBtn">Abbrechen</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="confirmDeleteModal" class="modal">
+        <div class="modal-content">
+            <h3 id="confirmDeleteTitle">Wirklich löschen?</h3>
+            <p id="confirmDeleteText">Möchtest du diesen Eintrag wirklich löschen?</p>
+            <div class="modal-buttons">
+                <button class="delete-btn-modal" id="confirmDeleteBtn">Löschen</button>
+                <button class="cancel-btn" onclick="closeDeleteModal()">Abbrechen</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
